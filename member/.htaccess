@@ -1,0 +1,63 @@
+Options -MultiViews -Indexes
+
+RewriteEngine On
+
+# Handle Authorization Header
+
+RewriteCond %{HTTP:Authorization} .
+
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+RewriteRule ^myTask/taskCenter$ myTask/taskCenter.php [L]
+RewriteRule ^redenvelope/manage$ redenvelope/manage.php [L]
+RewriteRule ^promotion/index$ promotion/index.php [L]
+RewriteRule ^MyWallet$ MyWallet.php [L]
+RewriteRule ^Security$ Security.php [L]
+RewriteRule ^MyBank$ MyBank.php [L]
+RewriteRule ^myaddress$ myaddress.php [L]
+RewriteRule ^financial/index$ financial/index.php [L]
+RewriteRule ^about/index$ about/index.php [L]
+RewriteRule ^ContactUs$ ContactUs.php [L]
+RewriteRule ^complaint/index$ complaint/index.php [L]
+
+RewriteRule ^member/index$ member/index.php [L]
+RewriteRule ^index$ index.php [L]
+
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [NC, L]
+
+# RewriteCond %{REQUEST_FILENAME}.php -f
+# RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+ 
+
+# Redirect Trailing Slashes If Not A Folder...
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_URI} (.+)/$
+
+RewriteRule ^ %1 [L,R=301]
+
+ 
+
+# Handle Front Controller...
+
+RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.gif|robots\.txt)$ [NC]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^ index.php [L]
+
+ 
+
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteCond %{REQUEST_URI} !^/public/
+
+RewriteRule ^(css|js|images)/(.*)$ public/$1/$2 [L,NC]
